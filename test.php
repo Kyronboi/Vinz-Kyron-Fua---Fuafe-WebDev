@@ -18,7 +18,7 @@
             </div>
            <nav class="nav-links">
                 <a href="#" data-target="home">Home</a>
-                <a href="#" data-target="menu">Our Menu</a>
+                <a href="menu.php" class="active">Our Menu</a>
                 <a href="#" data-target="contact">Contact Us</a>
                 <a href="#" data-target="blog">Blog</a>
             </nav>
@@ -33,7 +33,7 @@
             <div class="hero-left">
                 <img src="pictures/MainTwo.svg" alt="Fualfe Logo" class="big-logo">
                 <p class="tagline">All you need is coffee, wifi, and a dream.</p>
-                <button class="order-btn">Order Now</button>
+                <a href="menu.php" class="order-btn">Order Now</a>
             </div>
 
             <!-- Right Side: Menu Cards -->
@@ -47,7 +47,7 @@
                         </div>
                         <h3>Espresso</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="#" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- Mocha Card -->
@@ -57,7 +57,7 @@
                         </div>
                         <h3>Mocha</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="#" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- Latte Card -->
@@ -67,7 +67,7 @@
                         </div>
                         <h3>Latte</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="#" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- NEW: Cappuccino (4th product) -->
@@ -75,7 +75,7 @@
                         <div class="card-img"><img src="pictures/cappuccino.jpg" alt="Cappuccino"></div>
                         <h3>Cappuccino</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="#" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
                  </div>
                 </div>
@@ -245,7 +245,7 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=<?php echo filemtime('script.js'); ?>"></script>
 </body>
 </html>
 

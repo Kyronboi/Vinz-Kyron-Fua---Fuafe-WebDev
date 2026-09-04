@@ -15,9 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. CLICK ACTIONS: Scroll or open blank page based on data-target
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault(); // Stop default anchor jump
-
             const target = this.getAttribute('data-target');
+
+            // Allow regular page links, such as Our Menu, to navigate normally.
+            if (!target) return;
+
+            event.preventDefault();
 
             if (target === 'home') {
                 // Scroll to top (hero section)
@@ -30,10 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (target === 'blog') {
                 // Scroll to comments/testimonials section
                 document.getElementById('blog').scrollIntoView({ behavior: 'smooth' });
-            }
-            else if (target === 'menu') {
-                // Open a blank page (placeholder)
-                window.open('', '_blank'); // Opens a new empty tab
             }
         });
     });
