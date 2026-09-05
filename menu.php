@@ -15,10 +15,10 @@
             <img src="pictures/cup.png" alt="Logo Icon">
         </div>
         <nav class="nav-links">
-            <a href="test.php#home">Home</a>
+            <a href="index.php#home">Home</a>
             <a href="menu.php" class="active">Our Menu</a>
-            <a href="test.php#contact">Contact Us</a>
-            <a href="test.php#blog">Blog</a>
+            <a href="index.php#contact">Contact Us</a>
+            <a href="index.php#blog">Blog</a>
         </nav>
         <div class="signin-btn">
             <a href="#"><i class="fas fa-user"></i> Sign In</a>
