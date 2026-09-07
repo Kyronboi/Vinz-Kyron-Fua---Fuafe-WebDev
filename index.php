@@ -1,6 +1,15 @@
 <?php
 session_start();
+require 'database/config.php';
 $isLoggedIn = isset($_SESSION['user_id']);
+$cartCount = 0;
+if ($isLoggedIn) {
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart WHERE customer_id = :customer_id");
+    $stmt->bindValue(':customer_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->execute();
+    $cartCount = $stmt->fetchColumn() ?: 0;
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,18 +37,28 @@ $isLoggedIn = isset($_SESSION['user_id']);
             </div>
             
             <nav class="nav-links">
-                <a href="index.php#home" class="active">Home</a>
+                <a href="index.php#home">Home</a>
                 <a href="menu.php">Our Menu</a>
                 <a href="index.php#contact">Contact Us</a>
                 <a href="index.php#blog">Blog</a>
             </nav>
             
-            <div class="signin-btn">
+            <!-- Header Actions (Cart + Sign In/Out) -->
+            <div class="header-actions">
                 <?php if ($isLoggedIn): ?>
-                    <a href="logout.php" class="btn-logout">Sign Out</a>
-                <?php else: ?>
-                    <a href="login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
+                    <a href="cart.php" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count"><?= $cartCount ?></span>
+                    </a>
                 <?php endif; ?>
+                
+                <div class="signin-btn">
+                    <?php if ($isLoggedIn): ?>
+                        <a href="logout.php" class="btn-logout">Sign Out</a>
+                    <?php else: ?>
+                        <a href="login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </header>
 

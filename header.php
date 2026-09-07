@@ -1,6 +1,19 @@
 <?php
-session_start();
-$isLoggedIn = isset($_SESSION['user_id']);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once 'database/config.php';
+
+$isLoggedIn = isset($_SESSION['user_id']); // session still uses 'user_id' for customer's id
+$cartCount = 0;
+
+if ($isLoggedIn) {
+    $pdo = getConnection();
+    $stmt = $pdo->prepare("SELECT SUM(quantity) FROM cart WHERE customer_id = :customer_id");
+    $stmt->bindValue(':customer_id', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->execute();
+    $cartCount = $stmt->fetchColumn() ?: 0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,23 +27,37 @@ $isLoggedIn = isset($_SESSION['user_id']);
 </head>
 <body>
     <header class="navbar">
-        <div class="logo-icon">
-            <img src="pictures/cup.png" alt="Logo Icon">
-            <?php if ($isLoggedIn): ?>
-                <span class="welcome-text">Welcome <?= htmlspecialchars($_SESSION['username']) ?>!</span>
-            <?php endif; ?>
+        <div class="logo-group">
+            <div class="logo-icon">
+                <img src="pictures/cup.png" alt="Logo Icon">
+                <?php if ($isLoggedIn): ?>
+                    <span class="welcome-text">Welcome <?= htmlspecialchars($_SESSION['username']) ?>!</span>
+                <?php endif; ?>
+            </div>
         </div>
+        
         <nav class="nav-links">
-            <a href="index.php#home" class="active">Home</a>
+            <a href="index.php#home">Home</a>
             <a href="menu.php">Our Menu</a>
             <a href="index.php#contact">Contact Us</a>
             <a href="index.php#blog">Blog</a>
         </nav>
-        <div class="signin-btn">
+        
+        <!-- NEW: Header Actions (Cart + Sign In/Out) -->
+        <div class="header-actions">
             <?php if ($isLoggedIn): ?>
-                <a href="logout.php" class="btn-logout">Sign Out</a>
-            <?php else: ?>
-                <a href="login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
+                <a href="cart.php" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count"><?= $cartCount ?></span>
+                </a>
             <?php endif; ?>
+            
+            <div class="signin-btn">
+                <?php if ($isLoggedIn): ?>
+                    <a href="logout.php" class="btn-logout">Sign Out</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
+                <?php endif; ?>
+            </div>
         </div>
     </header>
