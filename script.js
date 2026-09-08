@@ -89,3 +89,39 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial position
     updateCarousel();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const wrapper = document.querySelector('.testimonials-wrapper');
+    const track = wrapper?.querySelector('.testimonial-track');
+    const cards = wrapper?.querySelectorAll('.testimonial-card');
+    const prevButton = document.getElementById('prevComment');
+    const nextButton = document.getElementById('nextComment');
+
+    if (!wrapper || !track || !cards.length || !prevButton || !nextButton) return;
+
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        const visibleCards = window.innerWidth <= 768 ? 1 : 3;
+        const maxIndex = Math.max(0, cards.length - visibleCards);
+        const cardWidth = cards[0].getBoundingClientRect().width;
+        const gap = 20;
+
+        currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+        track.style.transform =
+            `translateX(-${currentIndex * (cardWidth + gap)}px)`;
+    }
+
+    nextButton.addEventListener('click', function () {
+        currentIndex++;
+        updateCarousel();
+    });
+
+    prevButton.addEventListener('click', function () {
+        currentIndex--;
+        updateCarousel();
+    });
+
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+});

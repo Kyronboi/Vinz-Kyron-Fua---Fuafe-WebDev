@@ -471,47 +471,19 @@ a, a:visited, a:hover, a:active {
     margin-bottom: 35px;
 }
 
-.testimonials-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    position: relative;
-}
-
-.testimonial-card {
-    background-color: #000; /* Black cards */
-    color: #fff;
-    padding: 30px 20px;
-    width: 300px;
-    border-radius: 8px;
-    position: relative;
-}
-
 .testimonial-avatar {
     font-size: 60px;
     color: #fff;
     margin-bottom: 10px;
 }
 
-.testimonial-card h4 {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
 .stars {
-    color: #f8a84a;
+    color: #ddd;
     margin-bottom: 15px;
 }
 
-.testimonial-card p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #ccc;
-    padding-bottom: 10px;
+.stars i.active {
+    color: #f8a84a;
 }
 
 .read-more {
@@ -520,27 +492,6 @@ a, a:visited, a:hover, a:active {
     font-size: 14px;
     font-weight: 500;
     margin-left: 5px;
-}
-
-.testimonial-arrows {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: -20px auto 0;
-    padding: 0 40px;
-    font-size: 30px;
-    color: #555;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(100% + 35px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-.testimonial-arrows i {
-    pointer-events: auto;
-    cursor: pointer;
 }
 
 .add-comment {
@@ -604,10 +555,6 @@ a, a:visited, a:hover, a:active {
     }
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .testimonials-wrapper {
-        flex-direction: column;
-        align-items: center;
     }
 }
 
@@ -1453,4 +1400,119 @@ body {
 /* Make sure all input fields inside the table don't get cut off */
 .admin-table input, .admin-table textarea {
     min-width: 60px;
+}
+
+/* Dynamic Blog / Comments */
+/* ============ FINAL BLOG CAROUSEL FIX - MIRRORS HERO SECTION ============ */
+.testimonials-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 50px; /* Creates a 50px buffer on each side for the arrows */
+    overflow: hidden; /* THIS IS THE KEY! Clips the 4th card initially */
+}
+
+.testimonial-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.4s ease;
+    /* NO width, NO overflow here! Let it grow to fit all cards */
+}
+
+.testimonial-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    box-sizing: border-box;
+    background-color: #000;
+    color: #fff;
+    padding: 30px 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Arrows: Positioned inside the padding area, never clipped */
+.testimonial-arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.testimonial-arrows .arrow {
+    pointer-events: auto;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #f8a84a;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* The "Find More" card */
+.find-more-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    border: 2px dashed #f8a84a;
+}
+
+.find-more-card .btn-auth {
+    width: auto;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* Comments Page Styles */
+.comments-page-section {
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    padding: 120px 40px 50px;
+}
+
+.comments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.comment-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ============ COMMENT STAR RATING (FIXED) ============ */
+.star-rating-input {
+    display: flex;
+    flex-direction: row-reverse; /* Flips the order so 1 is leftmost, 5 is rightmost */
+    justify-content: flex-end;
+    gap: 5px;
+    margin: 15px 0;
+}
+
+.star-rating-input input {
+    display: none;
+}
+
+.star-rating-input label {
+    cursor: pointer;
+    font-size: 35px;
+    color: #ddd; /* Default grey */
+    transition: color 0.2s;
+}
+
+/* Hover and checked states (highlight stars up to selected) */
+.star-rating-input input:checked ~ label,
+.star-rating-input label:hover,
+.star-rating-input label:hover ~ label {
+    color: #f8a84a; /* Orange */
 }

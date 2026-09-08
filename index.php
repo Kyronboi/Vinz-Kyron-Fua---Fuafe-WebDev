@@ -10,6 +10,11 @@ if ($isLoggedIn) {
     $stmt->execute();
     $cartCount = $stmt->fetchColumn() ?: 0;
 }
+
+// Fetch all comments
+$pdo = getConnection();
+$stmt = $pdo->query("SELECT c.*, cu.username FROM comments c JOIN customer cu ON c.customer_id = cu.id WHERE c.is_hidden = 0 ORDER BY c.created_at DESC");
+$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -178,48 +183,53 @@ if ($isLoggedIn) {
 
     <!-- ================= TESTIMONIALS / WHAT OUR CUSTOMERS SAY ================= -->
     <section class="testimonials-section" id="blog">
-        <div class="container">
-         <img src="bg-design/Beans-ml.png" class="deco-middle-left" alt="beans">
-         <img src="bg-design/Beans-mr.png" class="deco-middle-right" alt="beans">
+    <div class="container">
+        <img src="bg-design/Beans-ml.png" class="deco-middle-left" alt="beans">
+        <img src="bg-design/Beans-mr.png" class="deco-middle-right" alt="beans">
+        <img src="bg-design/Leavs-br.png" class="deco-lebottom-left" alt="leaves">
+        <img src="bg-design/Leaves-bl.png" class="deco-lebottom-right" alt="leaves">
 
-         <img src="bg-design/Leavs-br.png" class="deco-lebottom-left" alt="leaves">
-         <img src="bg-design/Leaves-bl.png" class="deco-lebottom-right"alt="leaves">
-
-            <h2 class="section-title">What our customers say</h2>
-            <div class="testimonials-wrapper">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"><i class="fas fa-user-circle"></i></div>
-                    <h4>Lorem Ipsum</h4>
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"><i class="fas fa-user-circle"></i></div>
-                    <h4>Lorem Ipsum</h4>
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"><i class="fas fa-user-circle"></i></div>
-                    <h4>Lorem Ipsum</h4>
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+        <h2 class="section-title">What our customers say</h2>
+        
+        <!-- The WRAPPER hides the off-screen cards -->
+        <div class="testimonials-wrapper" id="commentCarousel">
+            <!-- The TRACK slides left and right -->
+            <div class="testimonial-track">
+                <!-- Loop through comments -->
+                <?php foreach ($comments as $comment): ?>
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar"><i class="fas fa-user-circle"></i></div>
+                        <h4><?= htmlspecialchars($comment['username']) ?></h4>
+                        <div class="stars">
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <i class="fas fa-star <?= $i <= $comment['rating'] ? 'active' : '' ?>"></i>
+                            <?php endfor; ?>
+                        </div>
+                        <p><?= htmlspecialchars($comment['comment']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+                
+                <!-- 4th Card: Find More Comments -->
+                <div class="testimonial-card find-more-card">
+                    <div class="testimonial-avatar"><i class="fas fa-comments"></i></div>
+                    <h4>More Reviews</h4>
+                    <p>See what other coffee lovers are saying.</p>
+                    <a href="comments.php" class="btn-auth" style="text-decoration:none; margin-top:10px;">Find More Comments</a>
                 </div>
             </div>
-            <!-- Testimonial Arrows -->
+            
             <div class="testimonial-arrows">
-                <i class="fas fa-chevron-left"></i>
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <!-- Comment Box -->
-            <div class="add-comment">
-                <input type="text" placeholder="Add a Comment....">
+                <button class="arrow left" id="prevComment"><i class="fas fa-chevron-left"></i></button>
+                <button class="arrow right" id="nextComment"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
-    </section>
+
+        <!-- Changed to a Button linking to add_comment.php -->
+        <div class="add-comment">
+            <a href="add_comment.php" class="btn-auth">Add a Comment</a>
+        </div>
+    </div>
+</section>
 
         <!-- ================= CONTACT SECTION ================= -->
     <section class="contact-section" id="contact">

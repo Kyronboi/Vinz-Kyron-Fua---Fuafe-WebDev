@@ -25,4 +25,4 @@ $stmt->execute(['customer_id' => $_SESSION['user_id']]);
         <a href="menu.php" class="btn-auth checkout-btn">Continue Shopping</a>
     </div>
 </section>
-<?php include 'footer.php'; ?>
+<?php include 'auth_footer.php'; ?>

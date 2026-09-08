@@ -162,9 +162,12 @@ if (!empty($products)) {
 <body>
     <?php include 'header.php'; ?>
 
-    <section class="admin-section">
+   <section class="admin-section">
         <div class="container">
             <h1 class="page-title">Admin Dashboard</h1>
+
+            <p style="margin-bottom:20px;"><a href="admin_comments.php" style="color: orange; font-weight: bold;">Manage Comments →</a></p>
+
             <?php if ($message): ?>
                 <p class="admin-message"><?= htmlspecialchars($message) ?></p>
             <?php endif; ?>
@@ -196,77 +199,88 @@ if (!empty($products)) {
                 </form>
             </div>
 
-            <!-- Manage Inventory (Update All + Individual Update) -->
+            <!-- Manage Inventory -->
             <div class="admin-panel">
                 <h2>Manage Inventory</h2>
                 <?php if (empty($products)): ?>
                     <p>No products found.</p>
                 <?php else: ?>
+                    
+                      <!-- ONE FORM FOR ALL -->
                     <form method="POST" id="inventoryForm">
-                        <input type="hidden" name="admin_action" value="update_all">
-                    <div class="table-scroll-wrapper">
-                        <table class="admin-table">
-                            <tr>
-                                <th>ID</th>
-                                <th>Image Path</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Small Price</th>
-                                <th>Regular Price</th>
-                                <th>Large Price</th>
-                                <th>Stock</th>
-                                <th>Actions</th>
-                            </tr>
-                            <?php foreach ($products as $product): ?>
-                                <?php 
-                                    $small = $sizesLookup[$product['id']]['Small'] ?? 0;
-                                    $regular = $sizesLookup[$product['id']]['Regular'] ?? 0;
-                                    $large = $sizesLookup[$product['id']]['Large'] ?? 0;
-                                ?>
+                        <!-- Hidden fields to be manipulated by JavaScript -->
+                        <input type="hidden" name="admin_action" id="admin_action" value="update_all">
+                        <input type="hidden" name="update_id" id="update_id" value="">
+                        <input type="hidden" name="delete_product_id" id="delete_product_id" value="">
+                        
+                        <div class="table-scroll-wrapper">
+                            <table class="admin-table">
                                 <tr>
-                                    <td><?= $product['id'] ?></td>
-                                    <td>
-                                        <input type="text" name="image_path[<?= $product['id'] ?>]" value="<?= htmlspecialchars($product['image_path']) ?>" style="width:150px;">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="name[<?= $product['id'] ?>]" value="<?= htmlspecialchars($product['name']) ?>" style="width:100px;">
-                                    </td>
-                                    <td>
-                                        <textarea name="description[<?= $product['id'] ?>]" style="width:200px; height:50px;"><?= htmlspecialchars($product['description']) ?></textarea>
-                                    </td>
-                                    <td>
-                                        <input type="number" step="0.01" name="small_price[<?= $product['id'] ?>]" value="<?= $small ?>" style="width:70px;">
-                                    </td>
-                                    <td>
-                                        <input type="number" step="0.01" name="regular_price[<?= $product['id'] ?>]" value="<?= $regular ?>" style="width:70px;">
-                                    </td>
-                                    <td>
-                                        <input type="number" step="0.01" name="large_price[<?= $product['id'] ?>]" value="<?= $large ?>" style="width:70px;">
-                                    </td>
-                                    <td>
-                                        <input type="number" name="stock[<?= $product['id'] ?>]" value="<?= (int)$product['stock'] ?>" min="0" style="width:60px;">
-                                        <!-- FIXED: Renamed to product_id[] for the array -->
-                                        <input type="hidden" name="product_id[]" value="<?= $product['id'] ?>">
-                                    </td>
-                                    <td>
-                                        <button type="submit" name="admin_action" value="update_individual" onclick="return confirm('Update this product?')" class="btn-small">Update</button>
-                                        <input type="hidden" name="update_id" value="<?= $product['id'] ?>">
-                                        
-                                        <button type="submit" name="admin_action" value="delete_product" onclick="return confirm('Delete this product?')" class="btn-danger">Delete</button>
-                                        <!-- FIXED: Renamed from product_id to delete_product_id to avoid conflict -->
-                                        <input type="hidden" name="delete_product_id" value="<?= $product['id'] ?>">
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Image Path</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Small Price</th>
+                                    <th>Regular Price</th>
+                                    <th>Large Price</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
+                                <?php foreach ($products as $product): ?>
+                                    <?php 
+                                        $small = $sizesLookup[$product['id']]['Small'] ?? 0;
+                                        $regular = $sizesLookup[$product['id']]['Regular'] ?? 0;
+                                        $large = $sizesLookup[$product['id']]['Large'] ?? 0;
+                                    ?>
+                                    <tr>
+                                        <td><?= $product['id'] ?></td>
+                                        <td><input type="text" name="image_path[<?= $product['id'] ?>]" value="<?= htmlspecialchars($product['image_path']) ?>" style="width:150px;"></td>
+                                        <td><input type="text" name="name[<?= $product['id'] ?>]" value="<?= htmlspecialchars($product['name']) ?>" style="width:100px;"></td>
+                                        <td><textarea name="description[<?= $product['id'] ?>]" style="width:200px; height:50px;"><?= htmlspecialchars($product['description']) ?></textarea></td>
+                                        <td><input type="number" step="0.01" name="small_price[<?= $product['id'] ?>]" value="<?= $small ?>" style="width:70px;"></td>
+                                        <td><input type="number" step="0.01" name="regular_price[<?= $product['id'] ?>]" value="<?= $regular ?>" style="width:70px;"></td>
+                                        <td><input type="number" step="0.01" name="large_price[<?= $product['id'] ?>]" value="<?= $large ?>" style="width:70px;"></td>
+                                        <td>
+                                            <input type="number" name="stock[<?= $product['id'] ?>]" value="<?= (int)$product['stock'] ?>" min="0" style="width:60px;">
+                                            <input type="hidden" name="product_id[]" value="<?= $product['id'] ?>">
+                                        </td>
+                                        <td>
+                                            <!-- Buttons: Don't submit directly; use JavaScript -->
+                                            <button type="button" class="btn-small" onclick="submitIndividual(<?= $product['id'] ?>)">Update</button>
+                                            <button type="button" class="btn-danger" onclick="submitDelete(<?= $product['id'] ?>)">Delete</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                        </div>
+                        
+                        <!-- The main submit button: stays as "Update All" -->
                         <button type="submit" class="btn-auth" style="margin-top:20px;">Update All Products</button>
                     </form>
+
                 <?php endif; ?>
             </div>
         </div>
     </section>
 
-    <?php include 'footer.php'; ?>
+    <script>
+        function submitIndividual(productId) {
+            document.getElementById('admin_action').value = 'update_individual';
+            document.getElementById('update_id').value = productId;
+            document.getElementById('delete_product_id').value = '';
+            document.getElementById('inventoryForm').submit();
+        }
+
+        function submitDelete(productId) {
+            if (confirm('Delete this product?')) {
+                document.getElementById('admin_action').value = 'delete_product';
+                document.getElementById('delete_product_id').value = productId;
+                document.getElementById('update_id').value = '';
+                document.getElementById('inventoryForm').submit();
+            }
+        }
+    </script>
+
+    <?php include 'auth_footer.php'; ?>
 </body>
 </html>

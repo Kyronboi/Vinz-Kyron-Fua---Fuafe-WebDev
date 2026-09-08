@@ -53,4 +53,4 @@ foreach ($cart_items as $item) {
         <?php endif; ?>
     </div>
 </section>
-<?php include 'footer.php'; ?>
+<?php include 'auth_footer.php'; ?>
