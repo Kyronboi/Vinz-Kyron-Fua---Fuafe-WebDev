@@ -1278,3 +1278,179 @@ body {
     margin-left: auto;            /* Optional: center it */
     margin-right: auto;           /* Optional: center it */
 }
+
+/* Admin Panel */
+.admin-section {
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    padding: 100px 40px 50px;
+}
+
+.admin-message {
+    background: #f8a84a;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-panel {
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-panel h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 36px;
+    color: #f8a84a;
+    margin-bottom: 20px;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.admin-form label {
+    font-weight: 600;
+}
+
+.admin-form input, .admin-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.btn-small {
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background: #d9534f;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* Admin link in header */
+.admin-link {
+    color: #f8a84a;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 350px;
+}
+
+.admin-table input, .admin-table textarea {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Two-column Add Product Form */
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-form-grid .btn-auth {
+    width: 100%;
+}
+
+/* Table buttons */
+.btn-small, .btn-danger {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Stock Messages */
+.stock-message {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.out-of-stock {
+    color: #d9534f; /* Red */
+    background-color: #fce4e4;
+    border: 1px solid #f5c6cb;
+}
+
+.low-stock {
+    color: #e6952a; /* Orange */
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+}
+
+/* Disabled Button styling */
+.btn-auth:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* Horizontal scroll for the inventory table */
+.table-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    border-radius: 8px;
+}
+
+.admin-table {
+    min-width: 1100px; /* Forces the table to be wide enough for all columns */
+    border-collapse: collapse;
+}
+
+/* Make sure all input fields inside the table don't get cut off */
+.admin-table input, .admin-table textarea {
+    min-width: 60px;
+}

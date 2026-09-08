@@ -44,16 +44,18 @@ if ($isLoggedIn) {
             <a href="index.php#contact">Contact Us</a>
             <a href="index.php#blog">Blog</a>
         </nav>
-        
+
         <!-- NEW: Header Actions (Cart + Sign In/Out) -->
         <div class="header-actions">
             <?php if ($isLoggedIn): ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                    <a href="admin.php" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
+                <?php endif; ?>
                 <a href="cart.php" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count"><?= $cartCount ?></span>
                 </a>
             <?php endif; ?>
-            
             <div class="signin-btn">
                 <?php if ($isLoggedIn): ?>
                     <a href="logout.php" class="btn-logout">Sign Out</a>

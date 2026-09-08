@@ -1,8 +1,8 @@
 <?php
-require 'database/config.php';
-require 'validation.php';
+require_once 'database/config.php';
+require_once 'validation.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 $action = $_POST['action'] ?? null;
 
@@ -33,7 +33,6 @@ if ($action === 'register') {
     try {
         $pdo = getConnection();
         
-        // Check if email already exists
         $stmt = $pdo->prepare("SELECT id FROM customer WHERE email = :email");
         $stmt->bindValue(':email', $result['data']['email']);
         $stmt->execute();
@@ -42,9 +41,8 @@ if ($action === 'register') {
             exit;
         }
 
-        $sql = "INSERT INTO customer (username, email, age, location, password)
-                VALUES (:username, :email, :age, :location, :password)";
-
+        $sql = "INSERT INTO customer (username, email, age, location, password, role)
+                VALUES (:username, :email, :age, :location, :password, 'customer')";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':username', $result['data']['username']);
         $stmt->bindValue(':email', $result['data']['email']);
@@ -74,24 +72,30 @@ if ($action === 'login') {
 
     try {
         $pdo = getConnection();
-        $sql = "SELECT id, username, email, age, location, password FROM customer WHERE email = :email";
+        $sql = "SELECT id, username, email, age, location, password, role FROM customer WHERE email = :email";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':email', $email);
         $stmt->execute();
-        $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$customer || !password_verify($password, $customer['password'])) {
+        if (!$user || !password_verify($password, $user['password'])) {
             header('Location: login.php?error=' . urlencode("Invalid email or password."));
             exit;
         }
 
         // Set session variables
-        $_SESSION['user_id'] = $customer['id'];
-        $_SESSION['username'] = $customer['username'];
-        $_SESSION['email'] = $customer['email'];
-        $_SESSION['location'] = $customer['location'];
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['location'] = $user['location'];
+        $_SESSION['role'] = $user['role'];
 
-        header('Location: index.php');
+        // Redirect admin to admin dashboard
+        if ($user['role'] === 'admin') {
+            header('Location: admin.php');
+        } else {
+            header('Location: index.php');
+        }
         exit;
     } catch (PDOException $e) {
         header('Location: login.php?error=' . urlencode($e->getMessage()));
