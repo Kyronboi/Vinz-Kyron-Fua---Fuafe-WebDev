@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Check if logged in

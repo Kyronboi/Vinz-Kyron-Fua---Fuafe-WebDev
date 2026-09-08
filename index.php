@@ -14,7 +14,10 @@ if ($isLoggedIn) {
 // Fetch all comments
 $pdo = getConnection();
 $stmt = $pdo->query("SELECT c.*, cu.username FROM comments c JOIN customer cu ON c.customer_id = cu.id WHERE c.is_hidden = 0 ORDER BY c.created_at DESC");
-$comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$all_comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Limit to first 3 comments for the carousel (plus "Find More" card = 4 cards max)
+$comments = array_slice($all_comments, 0, 3);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +46,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             <nav class="nav-links">
                 <a href="index.php#home">Home</a>
-                <a href="menu.php">Our Menu</a>
+                <a href="Order/menu.php">Our Menu</a>
                 <a href="index.php#contact">Contact Us</a>
                 <a href="index.php#blog">Blog</a>
             </nav>
@@ -75,7 +78,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="hero-left">
                 <img src="pictures/MainTwo.svg" alt="Fualfe Logo" class="big-logo">
                 <p class="tagline">All you need is coffee, wifi, and a dream.</p>
-                <a href="menu.php" class="order-btn">Order Now</a>
+                <a href="Order/menu.php" class="order-btn">Order Now</a>
             </div>
 
             <!-- Right Side: Menu Cards -->
@@ -88,8 +91,8 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="pictures/Asset 1.png" alt="Espresso">
                         </div>
                         <h3>Espresso</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <p>Strong, bold, and pure. A classic shot of espresso.</p>
+                        <a href="Order/menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- Mocha Card -->
@@ -98,8 +101,8 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="pictures/Asset 2.png" alt="Mocha">
                         </div>
                         <h3>Mocha</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <p>Rich chocolate combined with our signature espresso.</p>
+                        <a href="Order/menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- Latte Card -->
@@ -108,16 +111,16 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <img src="pictures/Asset 3.png" alt="Latte">
                         </div>
                         <h3>Latte</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <p>Smooth milk with a delicate layer of foam.</p>
+                        <a href="Order/menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
 
                     <!-- NEW: Cappuccino (4th product) -->
                     <div class="menu-card">
                         <div class="card-img"><img src="pictures/cappuccino.jpg" alt="Cappuccino"></div>
                         <h3>Cappuccino</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
-                        <a href="menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
+                        <p>Perfect balance of espresso, steam, and foam.</p>
+                        <a href="Order/menu.php" class="find-more">Find out more <i class="fas fa-arrow-right"></i></a>
                     </div>
                  </div>
                 </div>
@@ -214,7 +217,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="testimonial-avatar"><i class="fas fa-comments"></i></div>
                     <h4>More Reviews</h4>
                     <p>See what other coffee lovers are saying.</p>
-                    <a href="comments.php" class="btn-auth" style="text-decoration:none; margin-top:10px;">Find More Comments</a>
+                    <a href="Comments/comments.php" class="btn-auth" style="text-decoration:none; margin-top:10px;">Find More Comments</a>
                 </div>
             </div>
             
@@ -226,7 +229,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Changed to a Button linking to add_comment.php -->
         <div class="add-comment">
-            <a href="add_comment.php" class="btn-auth">Add a Comment</a>
+            <a href="Comments/add_comment.php" class="btn-auth">Add a Comment</a>
         </div>
     </div>
 </section>

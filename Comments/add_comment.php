@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 // Security: Ensure user is logged in to comment
 if (!isset($_SESSION['user_id'])) {
@@ -35,10 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Add Comment - Fuafe</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <?php include __DIR__ . '/../header.php'; ?>
 
     <section class="auth-section">
         <div class="auth-card">
@@ -120,6 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 
-    <?php include 'auth_footer.php'; ?>
+    <?php include '../auth_footer.php'; ?>
 </body>
 </html>

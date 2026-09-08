@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 ?>
@@ -10,7 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>Order Placed</title>
-    <link rel="stylesheet" href="styles.css?v=<?php echo filemtime('styles.css'); ?>">
+    <link rel="stylesheet"
+      href="../styles.css?v=<?= filemtime(__DIR__ . '/../styles.css') ?>">
 </head>
 <body>
     <div class="auth-section">

@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 $pdo = getConnection();
@@ -13,7 +13,8 @@ if ($isAdmin) {
 }
 $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<?php include 'header.php'; ?>
+
+<?php include __DIR__ . '/../header.php'; ?>
 
 <section class="comments-page-section">
     <div class="container">
@@ -56,4 +57,4 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-<?php include 'auth_footer.php'; ?>
+<?php include '../auth_footer.php'; ?>

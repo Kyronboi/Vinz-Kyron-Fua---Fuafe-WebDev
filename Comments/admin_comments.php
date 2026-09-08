@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 // Admin access control
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Fetch all comments (including hidden)
 $comments = $pdo->query("SELECT c.*, cu.username FROM comments c JOIN customer cu ON c.customer_id = cu.id ORDER BY c.created_at DESC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 
 <section class="admin-section">
     <div class="container">
@@ -97,8 +97,8 @@ $comments = $pdo->query("SELECT c.*, cu.username FROM comments c JOIN customer c
                 </table>
             </div>
         </div>
-        <p><a href="admin.php" style="color:orange;">← Back to Admin Dashboard</a></p>
+        <p><a href="../admin.php" style="color:orange;">← Back to Admin Dashboard</a></p>
     </div>
 </section>
 
-<?php include 'auth_footer.php'; ?>
+<?php include '../auth_footer.php'; ?>

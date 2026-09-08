@@ -166,7 +166,7 @@ if (!empty($products)) {
         <div class="container">
             <h1 class="page-title">Admin Dashboard</h1>
 
-            <p style="margin-bottom:20px;"><a href="admin_comments.php" style="color: orange; font-weight: bold;">Manage Comments →</a></p>
+            <p style="margin-bottom:20px;"><a href="Comments/admin_comments.php" style="color: orange; font-weight: bold;">Manage Comments →</a></p>
 
             <?php if ($message): ?>
                 <p class="admin-message"><?= htmlspecialchars($message) ?></p>

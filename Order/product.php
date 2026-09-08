@@ -1,10 +1,10 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
-require_once 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 // Access control
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -55,27 +55,28 @@ $status = $_GET['status'] ?? null; // For error messages from add_to_cart.php
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($product['name']) ?> - Fuafe</title>
-    <link rel="stylesheet" href="styles.css?v=<?php echo filemtime('styles.css'); ?>">
+    <link rel="stylesheet"
+      href="../styles.css?v=<?= filemtime(__DIR__ . '/../styles.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header class="navbar">
         <div class="logo-group">
-            <div class="logo-icon"><img src="pictures/cup.png" alt="Logo Icon"></div>
+            <div class="logo-icon"><img src="../pictures/cup.png" alt="Logo Icon"></div>
             <span class="welcome-text">Welcome <?= htmlspecialchars($_SESSION['username']) ?>!</span>
         </div>
         <nav class="nav-links">
-            <a href="index.php#home">Home</a>
+            <a href="../index.php#home">Home</a>
             <a href="menu.php" class="active">Our Menu</a>
-            <a href="index.php#contact">Contact Us</a>
-            <a href="index.php#blog">Blog</a>
+            <a href="../index.php#contact">Contact Us</a>
+            <a href="../index.php#blog">Blog</a>
         </nav>
         
         <div class="header-actions">
             <?php if ($isLoggedIn): ?>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <a href="admin.php" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
+                    <a href="../admin.php" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
                 <?php endif; ?>
                 <a href="cart.php" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -84,9 +85,9 @@ $status = $_GET['status'] ?? null; // For error messages from add_to_cart.php
             <?php endif; ?>
             <div class="signin-btn">
                 <?php if ($isLoggedIn): ?>
-                    <a href="logout.php" class="btn-logout">Sign Out</a>
+                    <a href="../logout.php" class="btn-logout">Sign Out</a>
                 <?php else: ?>
-                    <a href="login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
+                    <a href="../login.php" class="btn-signin"><i class="fas fa-user"></i> Sign In</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -102,7 +103,7 @@ $status = $_GET['status'] ?? null; // For error messages from add_to_cart.php
 
             <div class="product-detail-card">
                 <div class="product-detail-image">
-                    <img src="<?= htmlspecialchars($product['image_path']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                    <img src="../<?= htmlspecialchars($product['image_path']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                 </div>
                 <div class="product-detail-info">
                     <h1><?= htmlspecialchars($product['name']) ?></h1>

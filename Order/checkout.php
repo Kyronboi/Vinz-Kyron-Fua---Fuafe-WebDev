@@ -1,9 +1,9 @@
 <?php
 session_start();
-require 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -16,7 +16,7 @@ $total = $stmt->fetchColumn() ?: 0;
 $stmt = $pdo->prepare("DELETE FROM cart WHERE customer_id = :customer_id");
 $stmt->execute(['customer_id' => $_SESSION['user_id']]);
 ?>
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 <section class="auth-section">
     <div class="auth-card checkout-card">
         <h2 style="color: green;">Order Placed Successfully!</h2>
@@ -25,4 +25,4 @@ $stmt->execute(['customer_id' => $_SESSION['user_id']]);
         <a href="menu.php" class="btn-auth checkout-btn">Continue Shopping</a>
     </div>
 </section>
-<?php include 'auth_footer.php'; ?>
+<?php include __DIR__ . '/../auth_footer.php'; ?>

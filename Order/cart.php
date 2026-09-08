@@ -2,10 +2,10 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once 'database/config.php';
+require_once __DIR__ . '/../database/config.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
 }
 
@@ -24,7 +24,7 @@ foreach ($cart_items as $item) {
     $total += $item['price'] * $item['quantity'];
 }
 ?>
-<?php include 'header.php'; ?>
+<?php include __DIR__ . '/../header.php'; ?>
 <section class="cart-section">
     <div class="container">
         <h1 class="page-title">Your Cart</h1>
@@ -36,7 +36,7 @@ foreach ($cart_items as $item) {
                     <tr><th>Item</th><th>Size</th><th>Price</th><th>Qty</th><th>Subtotal</th><th>Action</th></tr>
                     <?php foreach ($cart_items as $item): ?>
                         <tr>
-                            <td><img src="<?= htmlspecialchars($item['image_path']) ?>" width="50" height="50"> <?= htmlspecialchars($item['name']) ?></td>
+                            <td><img src="../<?= htmlspecialchars($item['image_path']) ?>" width="50" height="50"> <?= htmlspecialchars($item['name']) ?></td>
                             <td><?= htmlspecialchars($item['size']) ?></td>
                             <td>$<?= number_format($item['price'], 2) ?></td>
                             <td><?= $item['quantity'] ?></td>
@@ -53,4 +53,4 @@ foreach ($cart_items as $item) {
         <?php endif; ?>
     </div>
 </section>
-<?php include 'auth_footer.php'; ?>
+<?php include __DIR__ . '/../auth_footer.php'; ?>
