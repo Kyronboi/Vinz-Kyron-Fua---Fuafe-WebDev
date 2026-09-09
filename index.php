@@ -145,7 +145,7 @@ $comments = array_slice($all_comments, 0, 3);
             <div class="about-text">
                 <span class="section-label">About Us</span>
                 <h2 class="section-title">What is Fuafe?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                <p>Fuafe is your local, neighborhood coffee delivery service dedicated to bringing fresh, handcrafted drinks right to your doorstep. We believe great days start with great coffee, which is why we brew every order using locally roasted beans and deliver them iced, hot, or blended fast and fresh.</p>
             </div>
             <div class="about-image">
                 <!-- REPLACE WITH REAL IMAGE: About Section Image -->
@@ -163,22 +163,22 @@ $comments = array_slice($all_comments, 0, 3);
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fas fa-mug-hot"></i></div>
                     <h3>The Perfect Cup</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                    <p>Every drink is precisely brewed to order using calibrated recipes to guarantee rich flavor  and smooth texture from the very first sip to the last.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fas fa-seedling"></i></div>
                     <h3>The Best Blend</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                    <p>We source ethically grown, freshly roasted beans from local growers to craft signature blends that balanced, aromatic, and bold.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fas fa-leaf"></i></div>
                     <h3>Natural Ingredients</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                    <p>From real chocolate drizzles to pure dairy and high-quality syrups, we use natural ingredients without artificial additives or fillers.</p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fas fa-smile"></i></div>
                     <h3>Made with a Smile</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                    <p>Our baristas and delivery team care about every detail, making sure your favorite coffee arrives quickly and with a touch of local warmth.</p>
                 </div>
             </div>
         </div>
@@ -249,7 +249,7 @@ $comments = array_slice($all_comments, 0, 3);
             <!-- Right: Get in Touch Text -->
             <div class="contact-info">
                 <h2 class="contact-title">Get in Touch</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea fugiat nulla pariatur.</p>
+                <p>Have questions about our menu, delivery zones, or catering for an event? Drop us a line or give us a call. Our team is always ready to help you get your daily coffee fix delivered straight to your home or office.</p>
             </div>
         </div>
 
