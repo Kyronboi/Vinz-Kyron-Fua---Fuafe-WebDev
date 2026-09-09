@@ -7,14 +7,15 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/database/config.php';
 
-$isSubfolderPage =
-    strpos(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/Comments/') !== false ||
-    strpos(str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? ''), '/Order/') !== false;
+$scriptPath = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+$isCommentsPage = strpos($scriptPath, '/Comments/') !== false;
+$isOrderPage = strpos($scriptPath, '/Order/') !== false;
+$isSubfolderPage = $isCommentsPage || $isOrderPage;
 
 $sitePrefix = $isSubfolderPage ? '../' : '';
 
-$menuUrl = $isSubfolderPage ? 'menu.php' : 'Order/menu.php';
-$cartUrl = $isSubfolderPage ? 'cart.php' : 'Order/cart.php';
+$menuUrl = $isOrderPage ? 'menu.php' : ($isCommentsPage ? '../Order/menu.php' : 'Order/menu.php');
+$cartUrl = $isOrderPage ? 'cart.php' : ($isCommentsPage ? '../Order/cart.php' : 'Order/cart.php');
 
 $isLoggedIn = isset($_SESSION['user_id']);
 $cartCount = 0;
