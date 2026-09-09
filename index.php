@@ -57,7 +57,7 @@ $comments = array_slice($all_comments, 0, 3);
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                         <a href="admin.php" class="admin-link"><i class="fas fa-user-shield"></i> Admin</a>
                     <?php endif; ?>
-                    <a href="cart.php" class="cart-icon">
+                    <a href="Order/cart.php" class="cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count"><?= $cartCount ?></span>
                     </a>
