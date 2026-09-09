@@ -186,11 +186,11 @@ if (!empty($products)) {
                         <input type="text" name="image_path" placeholder="images/your-image.jpg" required>
                     </div>
                     <div class="form-column">
-                        <label>Price (Small) ($)</label>
+                        <label>Price (Small) (₱)</label>
                         <input type="number" step="0.01" name="small_price" required>
-                        <label>Price (Regular) ($)</label>
+                        <label>Price (Regular) (₱)</label>
                         <input type="number" step="0.01" name="regular_price" required>
-                        <label>Price (Large) ($)</label>
+                        <label>Price (Large) (₱)</label>
                         <input type="number" step="0.01" name="large_price" required>
                         <label>Initial Stock</label>
                         <input type="number" name="stock" value="0" required>

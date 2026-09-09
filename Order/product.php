@@ -119,7 +119,7 @@ $status = $_GET['status'] ?? null; // For error messages from add_to_cart.php
                     <div class="size-selection">
                         <h3>Choose your size:</h3>
                         <?php if (empty($sizes)): ?>
-                            <p>No size options available. Price: $<?= number_format($product['price'], 2) ?></p>
+                            <p>No size options available. Price: ₱ <?= number_format($product['price'], 2) ?></p>
                             <!-- If no sizes but stock exists, still show the button -->
                             <?php if (!$outOfStock): ?>
                                 <form method="POST" action="add_to_cart.php">
@@ -137,7 +137,7 @@ $status = $_GET['status'] ?? null; // For error messages from add_to_cart.php
                                             <input type="radio" id="size-<?= $size['size_name'] ?>" name="size" value="<?= htmlspecialchars($size['size_name']) ?>" required>
                                             <label for="size-<?= $size['size_name'] ?>">
                                                 <span class="size-label"><?= htmlspecialchars($size['size_name']) ?></span>
-                                                <span class="size-price">$<?= number_format($size['price'], 2) ?></span>
+                                                <span class="size-price">₱ <?= number_format($size['price'], 2) ?></span>
                                             </label>
                                         </div>
                                     <?php endforeach; ?>

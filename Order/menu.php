@@ -91,7 +91,7 @@ if ($isLoggedIn) {
                                 $regularPrice = $stmt->fetchColumn();
                                 if (!$regularPrice) $regularPrice = $product['price']; 
                                 ?>
-                                <span class="price">$<?= number_format($regularPrice, 2) ?></span>
+                                <span class="price">₱ <?= number_format($regularPrice, 2) ?></span>
                             </a>
                             <!-- Add to Cart Form -->
                             <form action="add_to_cart.php" method="POST" class="add-cart-form">
